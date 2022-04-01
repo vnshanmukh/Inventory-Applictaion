@@ -6,7 +6,17 @@ router = APIRouter(tags=['Inventory'],
 )
 @router.get('/products')
 async def products():
-    return Product.all_pks()
+    return [format(pk) for pk in Product.all_pks()]
+
+def format(pk: str):
+    product = Product.get(pk)
+
+    return {
+        'id': product.pk,
+        'name': product.name,
+        'price': product.price,
+        'quantity': product.quantity
+    }
 
 @router.post('/products')
 def create(product: Product):

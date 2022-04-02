@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from redis_om import get_redis_connection, HashModel
-from config import settings
-from Routers import inventory
+from Routers import inventory,payment
 app = FastAPI()
 
 app.add_middleware(
@@ -12,4 +10,4 @@ app.add_middleware(
     allow_headers=['*']
 )
 
-app.include_router(inventory.router)
+app.include_router(payment.router)
